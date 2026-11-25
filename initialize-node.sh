@@ -14,6 +14,14 @@ if ! command -v k3s >/dev/null 2>&1; then
     curl -sfL https://get.k3s.io | sudo sh -
 fi
 
-# Verify cluster health
-sudo k3s kubectl wait --for=condition=Ready nodes --all --timeout=180s
+# Wait for the node to register
+sudo k3s kubectl wait \
+    --for=create node/"$(hostname)" \
+    --timeout=180s
+
+# Wait for the node to become ready
+sudo k3s kubectl wait \
+    --for=condition=Ready node/"$(hostname)" \
+    --timeout=180s
+
 sudo k3s kubectl get nodes
