@@ -44,7 +44,15 @@ http proxy      <leave blank>
 software        only ssh server & system utils
 ```
 
-<INSERT STEP: "Remove USB drive"> 6. Log in to the Mac Mini 7. Get the IP address with `hostname -I` 8. Confirm ssh is active with `systemctl is-active ssh` 9. Confirm that you can log in with `ssh ben@<ip>` 10. Generate a key named `/Users/<username>/.ssh/id_ed25519_homelab` using `ssh-keygen -t ed25519` ONLY if you don't already have one 11. Copy the public key to the Mac Mini using `ssh-copy-id -i ~/.ssh/id_ed25519_homelab.pub ben@<ip>` 12. Verify you can connect with `ssh -i ~/.ssh/id_ed25519_homelab ben@<ip>` 13. Using `nano ~/.ssh/config`, update your ssh config to include:
+6. Remove the USB drive
+7. Log in to the Mac Mini
+8. Get the IP address with `hostname -I`
+9. Confirm ssh is active with `systemctl is-active ssh`
+10. Confirm that you can log in with `ssh ben@<ip>`
+11. Generate a key named `/Users/<username>/.ssh/id_ed25519_homelab` using `ssh-keygen -t ed25519` ONLY if you don't already have one
+12. Copy the public key to the Mac Mini using `ssh-copy-id -i ~/.ssh/id_ed25519_homelab.pub ben@<ip>`
+13. Verify you can connect with `ssh -i ~/.ssh/id_ed25519_homelab ben@<ip>`
+14. Using `nano ~/.ssh/config`, update your ssh config to include:
 
 ```text
 Host mini-<id>
@@ -54,33 +62,33 @@ Host mini-<id>
     IdentitiesOnly yes
 ```
 
-14. Verify your ssh config has the right permissions with `chmod 600 ~/.ssh/config`
-15. Verify you can connect with `ssh mini-<id>`
-16. Inside your ssh session, run:
+15. Verify your ssh config has the right permissions with `chmod 600 ~/.ssh/config`
+16. Verify you can connect with `ssh mini-<id>`
+17. Inside your ssh session, run:
 
 ```text
 ip route
 ip -br link
 ```
 
-17. Open the router IP in your browser
-18. Locate `mini-<n>` using its MAC address
-19. Allocate IP `192.168.1.100 + <n>` to it, e.g. `192.168.1.109` for `mini-9` or `192.168.1.110` for `mini-10`
-20. Run `sudo reboot` in your ssh session
-21. Update your ssh config with the new IP
-22. Verify you can still connect with `ssh mini-<n>`
-23. Install git
+18. Open the router IP in your browser
+19. Locate `mini-<n>` using its MAC address
+20. Allocate IP `192.168.1.100 + <n>` to it, e.g. `192.168.1.109` for `mini-9` or `192.168.1.110` for `mini-10`
+21. Run `sudo reboot` in your ssh session
+22. Update your ssh config with the new IP
+23. Verify you can still connect with `ssh mini-<n>`
+24. Install git
 
 ```text
 sudo apt update
 sudo apt install git
 ```
 
-24. Clone the repo
+25. Clone the repo
 
 ```text
 git clone <repository-url>
 cd homelab
 ```
 
-25. Add the Mac Mini to Kubernetes with `./initialize-node.sh`
+26. Add the Mac Mini to Kubernetes with `./initialize-node.sh`
