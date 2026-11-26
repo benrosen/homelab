@@ -7,7 +7,17 @@ sudo apt update
 sudo apt upgrade -y
 
 # Install dependencies
-sudo apt install -y curl ca-certificates
+sudo apt install -y \
+    curl \
+    ca-certificates \
+    open-iscsi \
+    nfs-common \
+    smartmontools
+
+# Configure iSCSI for Longhorn
+echo iscsi_tcp | sudo tee /etc/modules-load.d/iscsi.conf >/dev/null
+sudo modprobe iscsi_tcp
+sudo systemctl enable --now iscsid
 
 # Install K3s if not already installed
 if ! command -v k3s >/dev/null 2>&1; then
