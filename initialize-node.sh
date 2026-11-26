@@ -12,11 +12,19 @@ sudo apt install -y \
     ca-certificates \
     open-iscsi \
     nfs-common \
-    smartmontools
+    smartmontools \
+    cryptsetup
 
-# Configure iSCSI for Longhorn
-echo iscsi_tcp | sudo tee /etc/modules-load.d/iscsi.conf >/dev/null
+# Configure kernel modules for Longhorn
+printf 'iscsi_tcp\ndm_crypt\n' | \
+    sudo tee /etc/modules-load.d/longhorn.conf >/dev/null
+
+sudo rm -f /etc/modules-load.d/iscsi.conf
+
 sudo modprobe iscsi_tcp
+sudo modprobe dm_crypt
+
+# Enable iSCSI
 sudo systemctl enable --now iscsid
 
 # Install K3s if not already installed
