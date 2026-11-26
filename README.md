@@ -66,7 +66,7 @@ Host mini-<id>
 16. Verify you can connect with `ssh mini-<id>`
 17. Inside your ssh session, run:
 
-```text
+```sh
 ip route
 ip -br link
 ```
@@ -79,16 +79,24 @@ ip -br link
 23. Verify you can still connect with `ssh mini-<n>`
 24. Install git
 
-```text
+```sh
 sudo apt update
 sudo apt install git
 ```
 
 25. Clone the repo
 
-```text
+```sh
 git clone <repository-url>
 cd homelab
 ```
 
 26. Add the Mac Mini to Kubernetes with `./initialize-node.sh`
+
+## Initializing the Cluster
+
+Once, after onboarding the first Mac Mini, run:
+
+```sh
+./initialize-cluster.sh
+```
