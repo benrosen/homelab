@@ -59,4 +59,4 @@ sudo k3s kubectl wait \
     --timeout=300s
 
 # Initialize applications
-bash postgres/initialize.sh
+bash postgres/init.sh
