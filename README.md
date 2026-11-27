@@ -91,12 +91,4 @@ git clone <repository-url>
 cd homelab
 ```
 
-26. Add the Mac Mini to Kubernetes with `./initialize-node.sh`
-
-## Initializing the Cluster
-
-Once, after onboarding the first Mac Mini, run:
-
-```sh
-./initialize-cluster.sh
-```
+26. Initialize the Mac Mini with `bash init.sh`
